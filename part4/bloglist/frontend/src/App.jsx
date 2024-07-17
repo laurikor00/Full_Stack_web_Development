@@ -118,12 +118,15 @@ const App = () => {
         <BlogForm createBlog={handleCreateBlog} />
       </Togglable>
       {blogs.map(blog =>
-        <Blog key={blog.id} blog={blog} updateBlogLikes={updateBlogLikes}  /> //handleDelete={handleDeleteBlog}
+        <Blog key={blog.id} 
+        blog={blog} 
+        user={user}
+        updateBlogLikes={updateBlogLikes} 
+        handleDeleteBlog={handleDeleteBlog}/> 
       )}
     </div>
   );
 };
 
-export default App;
-//FullStackWebDevelopment\Blog_front\bloglist-frontend\Full_Stack_web_Development\part4\bloglist\frontend>
+export default App
 
