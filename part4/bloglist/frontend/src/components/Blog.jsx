@@ -1,8 +1,12 @@
 
 import React, { useState } from 'react';
 
-const Blog = ({ blog, updateBlogLikes }) => {
+const Blog = ({ blog, user, updateBlogLikes, handleDeleteBlog}) => {
   const [visible, setVisible] = useState(false);
+  //console.error(user.name)
+  //console.error(user.username)
+  //console.error(user.name)
+  //console.error(blog.user.username)
 
   const toggleVisibility = () => {
     setVisible(!visible);
@@ -32,7 +36,12 @@ const Blog = ({ blog, updateBlogLikes }) => {
     marginBottom: 5
   }
 
-  
+  const confirmDelete = () => {
+    console.error('Del fail');
+    if (window.confirm(`Are you sure you want to delete "${blog.title}" by ${blog.author}?`)) {
+      handleDeleteBlog(blog.id);
+    }
+  };
 
   return (
     <div style={blogStyle}>
@@ -51,6 +60,9 @@ const Blog = ({ blog, updateBlogLikes }) => {
           </p>
           <p>Added by {blog.user ? blog.user.name : 'Unknown'}</p>
         </div>
+      )}
+      { blog.user.name === user.name && ( //blog.user && user && 
+        <button onClick={confirmDelete}>delete</button>
       )}
     </div>
   );
