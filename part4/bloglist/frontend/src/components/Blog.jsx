@@ -37,15 +37,16 @@ const Blog = ({ blog, user, updateBlogLikes, handleDeleteBlog}) => {
   }
 
   const confirmDelete = () => {
-    if (window.confirm(`Are you sure you want to delete "${blog.title}" by ${blog.author}?`)) {
+    handleDeleteBlog(blog.id);
+    /*if (window.confirm(`Are you sure you want to delete "${blog.title}" by ${blog.author}?`)) {
       handleDeleteBlog(blog.id);
-    }
+    }*/
   };
 
   return (
-    <div style={blogStyle}>
+    <div style={blogStyle} data-testid="blog" data-title={blog.title} data-author={blog.author}>
       <div>
-        <strong>{blog.title}</strong> by {blog.author}
+        <strong data-testid="blog-title">{blog.title} </strong> by <span data-testid="blog-author">{blog.author}</span>
         <button onClick={toggleVisibility}>
           {visible ? 'Hide' : 'View'}
         </button>
@@ -54,14 +55,14 @@ const Blog = ({ blog, user, updateBlogLikes, handleDeleteBlog}) => {
         <div>
           <p>{blog.url}</p>
           <p>
-            {blog.likes} likes
-            <button onClick={handleLike}>Like</button>
+            <span data-testid="blog-likes">{blog.likes} likes</span>
+            <button data-testid="like-button" onClick={handleLike}>Like</button>
           </p>
-          <p>Added by {blog.user ? blog.user.name : 'Unknown'}</p>
+          <p>Added by <span data-testid="blog-user">{user.username}</span></p>
         </div>
       )}
-      { blog.user.name === user.name && ( //blog.user && user && 
-        <button onClick={confirmDelete}>delete</button>
+      { blog.user.id === user._id && ( 
+        <button onClick={confirmDelete} data-testid="delete-button">delete</button>
       )}
     </div>
   );
