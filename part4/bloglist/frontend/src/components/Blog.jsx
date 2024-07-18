@@ -37,7 +37,6 @@ const Blog = ({ blog, user, updateBlogLikes, handleDeleteBlog}) => {
   }
 
   const confirmDelete = () => {
-    console.error('Del fail');
     if (window.confirm(`Are you sure you want to delete "${blog.title}" by ${blog.author}?`)) {
       handleDeleteBlog(blog.id);
     }
